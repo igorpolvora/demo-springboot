@@ -14,6 +14,8 @@ import java.util.Arrays;
 import com.know.demo.entities.enums.OrderStatus;
 import com.know.demo.repositories.CategoryRepository;
 import com.know.demo.entities.Category;
+import com.know.demo.repositories.ProductRepository;
+import com.know.demo.entities.Product;
 
 @Configuration
 @Profile("test")
@@ -27,6 +29,9 @@ public class TestConfig implements CommandLineRunner {
 
     @Autowired
     private CategoryRepository categoryRepository;
+
+    @Autowired
+    private ProductRepository productRepository;
 
     @Override
     public void run(String... args) throws Exception {
@@ -42,8 +47,15 @@ public class TestConfig implements CommandLineRunner {
         Category c2 = new Category(null, "Books");
         Category c3 = new Category(null, "Clothing");
 
+        Product p1 = new Product(null, "The Lord of the Rings", "Lorem ipsum dolor sit amet, consectetur.", 90.0, "https://imgur.com/1345678");
+        Product p2 = new Product(null, "Smart TV", "Lorem ipsum dolor sit amet, consectetur.", 2190.0, "https://imgur.com/1345678");
+        Product p3 = new Product(null, "Macbook Pro", "Lorem ipsum dolor sit amet, consectetur.", 1250.0, "https://imgur.com/1345678");
+        Product p4 = new Product(null, "PC Gamer", "Lorem ipsum dolor sit amet, consectetur.", 1200.0, "https://imgur.com/1345678");
+        Product p5 = new Product(null, "Rails for Dummies", "Lorem ipsum dolor sit amet, consectetur.", 100.99, "https://imgur.com/1345678");
+
         categoryRepository.saveAll(Arrays.asList(c1, c2, c3));
         userRepository.saveAll(Arrays.asList(u1, u2));
         orderRepository.saveAll(Arrays.asList(o1, o2, o3));
+        productRepository.saveAll(Arrays.asList(p1, p2, p3, p4, p5));
     }
 }
