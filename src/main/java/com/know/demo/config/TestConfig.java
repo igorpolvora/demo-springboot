@@ -12,6 +12,8 @@ import com.know.demo.repositories.UserRepository;
 import com.know.demo.entities.Order;
 import java.util.Arrays;
 import com.know.demo.entities.enums.OrderStatus;
+import com.know.demo.repositories.CategoryRepository;
+import com.know.demo.entities.Category;
 
 @Configuration
 @Profile("test")
@@ -23,6 +25,9 @@ public class TestConfig implements CommandLineRunner {
     @Autowired
     private OrderRepository orderRepository;
 
+    @Autowired
+    private CategoryRepository categoryRepository;
+
     @Override
     public void run(String... args) throws Exception {
 
@@ -33,6 +38,11 @@ public class TestConfig implements CommandLineRunner {
         Order o2 = new Order(null, Instant.parse("2019-07-21T03:42:10Z"), OrderStatus.PAID, u2);
         Order o3 = new Order(null, Instant.parse("2019-07-22T15:21:22Z"), OrderStatus.SHIPPED, u1);
 
+        Category c1 = new Category(null, "Electronics");
+        Category c2 = new Category(null, "Books");
+        Category c3 = new Category(null, "Clothing");
+
+        categoryRepository.saveAll(Arrays.asList(c1, c2, c3));
         userRepository.saveAll(Arrays.asList(u1, u2));
         orderRepository.saveAll(Arrays.asList(o1, o2, o3));
     }
