@@ -1,13 +1,11 @@
 package com.know.demo.entities;
 
 import java.io.Serializable;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.know.demo.entities.pk.OrderItemPk;
 import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
-
 
 @Entity
 @Table(name = "tb_order_item")

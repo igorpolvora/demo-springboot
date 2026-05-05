@@ -1,7 +1,6 @@
 package com.know.demo.config;
 
 import java.time.Instant;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
@@ -18,7 +17,7 @@ import com.know.demo.repositories.ProductRepository;
 import com.know.demo.entities.Product;
 import com.know.demo.entities.OrderItem;
 import com.know.demo.repositories.OrderItemRepository;
-
+import com.know.demo.entities.Payment;
 @Configuration
 @Profile("test")
 public class TestConfig implements CommandLineRunner {
@@ -64,11 +63,15 @@ public class TestConfig implements CommandLineRunner {
         OrderItem oi4 = new OrderItem(o2, p5, 2, p5.getPrice());
         OrderItem oi5 = new OrderItem(o3, p2, 1, p2.getPrice());
 
+        Payment pay1 = new Payment(null, Instant.parse("2019-07-23T21:53:07Z"), o2);
+        o2.setPayment(pay1);
+
         categoryRepository.saveAll(Arrays.asList(c1, c2, c3));
         userRepository.saveAll(Arrays.asList(u1, u2));
         orderRepository.saveAll(Arrays.asList(o1, o2, o3));
         productRepository.saveAll(Arrays.asList(p1, p2, p3, p4, p5));
         orderItemRepository.saveAll(Arrays.asList(oi1, oi2, oi3, oi4, oi5));
+        orderRepository.save(o2);
 
         p1.getCategories().add(c2);
         p2.getCategories().add(c1);
